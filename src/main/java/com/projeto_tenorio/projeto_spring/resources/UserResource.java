@@ -21,7 +21,7 @@ public class UserResource {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> finAllUsers() {
+    public ResponseEntity<List<User>> findAllUsers() {
         List<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
 

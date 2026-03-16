@@ -1,10 +1,9 @@
 package com.projeto_tenorio.projeto_spring.resources;
 
 
-import com.projeto_tenorio.projeto_spring.entities.Order;
-import com.projeto_tenorio.projeto_spring.services.OrderService;
+import com.projeto_tenorio.projeto_spring.entities.Category;
+import com.projeto_tenorio.projeto_spring.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,23 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
-public class OrderResource {
+@RequestMapping("/categories")
+public class CategoryResource {
 
     @Autowired
-    private OrderService orderService;
+    private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAllUsers() {
-        List<Order> users = orderService.findAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
-
+    public ResponseEntity<List<Category>> findAll() {
+        List<Category> list = categoryService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id) {
-        Order obj =  orderService.findById(id);
+    public ResponseEntity<Category> findById(@PathVariable Long id) {
+        Category obj =  categoryService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
