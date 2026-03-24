@@ -22,10 +22,15 @@ public class Product implements Serializable {
     private double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+
     private Set<Category> categories = new HashSet<Category>();
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(Long id, String name, String description, double price, String imgUrl) {
         super();
@@ -84,7 +89,7 @@ public class Product implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id;
+        return Objects.equals(id, product.id);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.projeto_tenorio.projeto_spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -19,8 +20,9 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient
-    private Set<Category> products = new HashSet<Category>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<Product>();
 
     public Category() {}
 
@@ -46,7 +48,7 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public Set<Category> getProducts() {
+    public Set<Product> getProducts() {
         return products;
     }
 
